@@ -1,0 +1,19 @@
+.shadow-t {
+    box-shadow: 0 -5px 5px -5px #333;
+}
+
+.shadow-r {
+    box-shadow: -5px 0 5px -5px #333;
+}
+
+.shadow-b {
+    box-shadow: 0 5px 5px -5px #333;
+}
+
+.shadow-l {
+    box-shadow: 5px 0 5px -5px #333;
+}
+
+.shadow-all {
+    box-shadow: 0 0 5px #333;
+}

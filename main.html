@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/dist/my.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css"/>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
+
+    <script src="methods.js"></script>
+
+    <title>Tickets</title>
+</head>
+<body>
+
+<div id="form" class="flex flex-row justify-center">
+    <div id="form-from"
+         class="flex-initial flex-col relative p-4 px-3">
+        <input id="form-from__input" type="text" placeholder="Откуда"
+               class="block w-full rounded-xl border-gray-300 focus:border-emerald-600 focus:ring-emerald-600">
+        <div id="form-from__dropdown"
+             class=" absolute z-10 m-0 mt-2.5 p-4 left-0 flex-col w-full min-w-[150px]">
+            <div class="transition-colors first:shadow-t first:shadow-l first:shadow-r ease-in duration-75 hover:bg-emerald-300 hover:bg-opacity-60 hover:opacity-100 opacity-80 p-1 first:pt-[0.385rem] last:pb-[0.385rem] border-gray-400 border-r border-l first:rounded-t-md first:border-t last:border-b last:rounded-b-md">
+                From
+            </div>
+            <div class="transition-colors first:shadow-t first:shadow-l first:shadow-r ease-in duration-75 hover:bg-emerald-300 hover:bg-opacity-60 hover:opacity-100 opacity-80 p-1 first:pt-[0.385rem] last:pb-[0.385rem] border-gray-400 border-r border-l first:rounded-t-md first:border-t last:border-b last:rounded-b-md">
+                From
+            </div>
+            <div class="transition-colors first:shadow-t first:shadow-l first:shadow-r ease-in duration-75 hover:bg-emerald-300 hover:bg-opacity-60 hover:opacity-100 opacity-80 p-1 first:pt-[0.385rem] last:pb-[0.385rem] border-gray-400 border-r border-l first:rounded-t-md first:border-t last:border-b last:rounded-b-md">
+                From
+            </div>
+        </div>
+    </div>
+
+    <div id="form-destination"
+         class="flex-initial flex-col relative p-4 px-3">
+        <input id="form-destination__input" type="text" placeholder="Откуда"
+               class="block rounded-xl border-gray-300 focus:border-emerald-600 focus:ring-emerald-600">
+        <div id="form-destination__dropdown"
+             class="hidden absolute z-10 m-0 mt-2.5 p-4 left-0 flex-col w-full min-w-[150px]">
+            <div class="first:shadow-t first:shadow-l first:shadow-r transition-colors ease-in duration-75 hover:bg-emerald-300 hover:bg-opacity-60 hover:opacity-100 opacity-80 p-1 first:pt-[0.385rem] last:pb-[0.385rem] border-gray-400 border-r border-l first:rounded-t-md first:border-t last:border-b last:rounded-b-md">
+                Dest
+            </div>
+        </div>
+    </div>
+
+    <div id="form-flightDate"
+         class="flex-initial relative p-4 px-3">
+        <div class="flex absolute top-[1.6rem] pl-[0.5725rem] items-center justify-center pointer-events-none">
+            <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+            </svg>
+        </div>
+        <input id="form-flightDate__input" datepicker="" datepicker-format="yyyy-mm-dd" type="text" placeholder="Когда"
+               class="block pl-9 w-full rounded-xl border-gray-300 focus:border-emerald-600 focus:ring-emerald-600 datepicker-input">
+    </div>
+
+    <div id="form-returnDate__input"
+         class="flex-initial relative p-4 px-3">
+        <div class="flex absolute top-[1.6rem] pl-[0.5725rem] items-center justify-center pointer-events-none">
+            <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor"
+                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                      clip-rule="evenodd"></path>
+            </svg>
+        </div>
+
+        <input id="return_date" datepicker="" datepicker-format="yyyy-mm-dd" type="text" placeholder="Обратно"
+               class="block pl-9 w-full rounded-xl border-gray-300 focus:border-emerald-600 focus:ring-emerald-600 datepicker-input">
+    </div>
+</div>
+
+</body>
+
+<script>
+    function linkInputToDropdown(input_id, dropdown_id) {
+        let input = document.getElementById(input_id)
+        let dropdown = document.getElementById(dropdown_id)
+        input.addEventListener("focusin", (event) => {
+            console.log(event.target)
+            dropdown.style.display = "flex"
+        })
+
+        input.addEventListener("focusout", (event) => {
+            console.log(event.target)
+            dropdown.style.display = "none"
+        })
+    }
+
+    linkInputToDropdown("form-from__input", "form-from__dropdown")
+    linkInputToDropdown("form-destination__input", "form-destination__dropdown")
+</script>
+
+</html>

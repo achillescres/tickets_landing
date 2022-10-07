@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css"/>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
+    <script src="methods.js"></script>
+    <title>Document</title>
+</head>
+<body onload="start()">
+<div class="flex justify-center mt-5">
+    <div id="input_from" class="block">
+        <input id="find_city_from" onfocus="v_dropdown_from()" type="text" name="price" id="price"
+               class="block rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+               placeholder="Откуда">
+        <div id="dropdown_from"
+             class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700"
+             data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom">
+            <ul id="ul_city_airports_1" class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownDefault">
+                <li>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="input_to" class="block ml-2">
+        <input id="find_city_to" onfocus="v_dropdown_to()" type="text" name="price" id="price"
+               class="block rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+               placeholder="Куда">
+        <div id="dropdown_to" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700"
+             data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom">
+            <ul id="ul_city_airports_2" class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownDefault">
+                <li>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="relative ml-2">
+<!--        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">-->
+<!--            -->
+<!--        </div>-->
+        <input id="departure_date" datepicker="" datepicker-format="yyyy-mm-dd" type="text"
+                                                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                                   placeholder="Когда">
+        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                  clip-rule="evenodd"></path>
+        </svg>
+
+    </div>
+
+    <div class="relative ml-2">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                      clip-rule="evenodd"></path>
+            </svg>
+        </div>
+        <input id="return_date" datepicker="" datepicker-format="yyyy-mm-dd" type="text"
+               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+               placeholder="Обратно">
+    </div>
+
+    <button id="find_offers"
+            class="ml-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="button">
+        Рассчитать
+    </button>
+
+
+</div>
+<div class="offers mt-10">
+
+</div>
+<!-- <button id="dropdownDefault" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+    Страна
+    <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+        </path>
+    </svg>
+</button> -->
+<!-- Dropdown menu -->
+
+
+<script>
+    var from_iata = ''
+    var to_iata = ''
+    var departure_date = ''
+    var return_date = ''
+
+    // document.getElementById("departure_date").addEventListener('input', async function() {
+    //     departure_date = this.value
+    // })
+    // document.getElementById("return_date").addEventListener('input', async function() {
+    //     return_date = this.value
+    // })
+    async function start() {
+        // await get("https://autocomplete.travelpayouts.com/places2?locale=en&types[]=airport&types[]=city&term=moscow")
+    }
+
+    document.getElementById("find_offers").addEventListener('click', async function () {
+        departure_date = document.getElementById("departure_date").value
+        return_date = document.getElementById("return_date").value
+        let res = await fetch('https://test.api.amadeus.com/v1/security/oauth2/token', {
+            method: 'POST',
+            body: new URLSearchParams({
+                'grant_type': 'client_credentials',
+                'client_id': 'gFwvI0a4hQkDvnGu8CppgZ6ui1IWEAsy',
+                'client_secret': 'ieKvkUOTWVLO08Bt'
+            })
+        });
+        let token = (await res.json()).access_token;
+        console.log(token)
+        res = await fetch(`https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${from_iata}&destinationLocationCode=${to_iata}&departureDate=${departure_date}&returnDate=${return_date}&adults=1&nonStop=false&currencyCode=RUB&max=250`, {headers: {'Authorization': 'Bearer ' + token}})
+        let offers = (await res.json());
+        console.log(offers)
+        offers.data.forEach(offer => {
+            document.querySelector(".offers").appendChild(createTicket(offer.price.total, offer.validatingAirlineCodes[0]))
+        })
+    })
+
+    async function v_dropdown_from() {
+        let dropdown = document.getElementById("dropdown_from")
+        if (dropdown.classList.contains("hidden")) {
+            dropdown.classList.remove("hidden")
+        } else {
+            dropdown.classList.add("hidden")
+        }
+    }
+
+    async function v_dropdown_to() {
+        let dropdown = document.getElementById("dropdown_to")
+        if (dropdown.classList.contains("hidden")) {
+            dropdown.classList.remove("hidden")
+        } else {
+            dropdown.classList.add("hidden")
+        }
+    }
+
+    document.getElementById("find_city_from").addEventListener('input', async function () {
+        let ul = document.getElementById("ul_city_airports_1")
+        ul.textContent = ''
+
+        let text = this.value
+        if (text === '') {
+            return
+        }
+
+        let url = `https://autocomplete.travelpayouts.com/places2?locale=ru&types[]=airport&types[]=city&term=${text}`
+        res = await get(url)
+        ul.textContent = ''
+        let cities = []
+        await res.forEach(item => {
+            if (item.type === 'city') {
+                let city = createCity(item.name)
+                cities.push(item.name)
+                city.children[0].addEventListener('click', function () {
+                    console.log('city clicked')
+                    from_iata = item.code
+                    document.getElementById("find_city_from").value = item.name
+                    v_dropdown_from()
+                })
+                ul.appendChild(city)
+            }
+            if (item.type === 'airport' && cities.includes(item.city_name)) {
+                console.log(true)
+                let airport = createAirport(item.name)
+                airport.addEventListener('click', function () {
+                    console.log('airport clicked')
+                    from_iata = item.code
+                    document.getElementById("find_city_from").value = item.name
+                    v_dropdown_from()
+                })
+                document.getElementById(item.city_name).appendChild(airport)
+            }
+        });
+    })
+
+    document.getElementById("find_city_to").addEventListener('input', async function () {
+        let ul = document.getElementById("ul_city_airports_2")
+        ul.textContent = ''
+
+        let text = this.value
+        if (text === '') {
+            return
+        }
+
+        let url = `https://autocomplete.travelpayouts.com/places2?locale=ru&types[]=airport&types[]=city&term=${text}`;
+        res = await get(url);
+        ul.textContent = '';
+        let cities = []
+        await res.forEach(item => {
+            if (item.type === 'city') {
+                let city = createCity(item.name)
+                cities.push(item.name)
+                city.children[0].addEventListener('click', function () {
+                    to_iata = item.code
+                    document.getElementById("find_city_to").value = this.textContent
+                    v_dropdown_to()
+                })
+                ul.appendChild(city)
+            }
+            if (item.type === 'airport' && cities.includes(item.city_name)) {
+                console.log(true)
+                let airport = createAirport(item.name)
+                airport.addEventListener('click', function () {
+                    to_iata = item.code
+                    document.getElementById("find_city_to").value = this.textContent
+                    v_dropdown_to()
+                })
+                document.getElementById(item.city_name).appendChild(airport)
+            }
+        });
+    });
+
+    // document.querySelectorAll('.d-item').forEach(item => {
+    //     item.addEventListener('click', async function() {
+    //         document.getElementById("find_city").value = this.textContent
+    //         await v_dropdown()
+    //     })
+    // });
+</script>
+</body>
+</html>
