@@ -46,7 +46,7 @@ function createTicket(price, company){
 function createCity(name){
     const newLi = document.createElement("li");
     const newA = document.createElement("a");
-    
+
     newA.classList.add("d-item", "block", "py-2", "px-4", "hover:bg-gray-100", "dark:hover:bg-gray-600", "dark:hover:text-white")
     newA.text = name
     newLi.id = name
@@ -54,6 +54,9 @@ function createCity(name){
     
     return newLi
 }
+
+
+
 function createAirport(name){
     const newA = document.createElement("a");
     
